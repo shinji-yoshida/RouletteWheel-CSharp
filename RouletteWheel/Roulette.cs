@@ -24,10 +24,22 @@ namespace RouletteWheel{
 			return result;
 		}
 
+		public RelativeLot<T> CreateRelativeLot<T>(Action<RelativeLot<T>> setup){
+			var result = new RelativeLot<T>(randGenerator);
+			setup(result);
+			return result;
+		}
+
 		public bool Binary(float probability) {
 			Assertion._assert_(probability >= 0);
 			Assertion._assert_(probability <= 1);
 			return randGenerator.Float() < probability;
+		}
+
+		public RandGenerator RandGenerator {
+			get {
+				return randGenerator;
+			}
 		}
 	}
 }
